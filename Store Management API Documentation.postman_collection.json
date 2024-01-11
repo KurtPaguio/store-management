@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "a939e414-816b-4f41-b6fd-294644dfe0ee",
+		"_postman_id": "61604162-56dd-4d51-bd0d-37acbe1992b8",
 		"name": "Store Management API Documentation",
 		"description": "Welcome to the **Store Management API documentation**. This guide serves as a comprehensive resource for developers for testing the Store Management APIs. This documentation will provide you with the necessary information to understand and effectively utilize our API Endpoints, what, and how to pass inputs to an endpoint.\n\n---\n\nThe Store Management API provides different APIs in interacting with the Users and Stores. Users can create and log in into the system and create their stores. They can also update or delete the stores they created. They are also restriction such as users can only see and manage their own stores. Administrator or Super Administrators have access to all features of the system such as getting all stores, managing all stores, etc. Feel free to explore the system and use the guide for instructions.\n\n## **Getting started guide**\n\nBefore making a request to an API:\n\n- Create an account first then use it to log in. After logging in, a JWT will be provided that will be used for making a certain request, mostly to validate if the feauture is not available for the user or another action is provided.\n    \n\n## Authentication\n\nThe Store Management API uses JWT that will be generated upon logging in making a request.\n\nPostman provides \"Bearer Token\" in authorization where the JWT can be inserted. It must be included for each request.\n\n### Authentication error response\n\nIf an API requires JWT and is not expired, inserted or missing key, it will return a response that the token is invalid and must be logged in to generate another token.\n\n### Internal Server Error and OK response\n\nAn Internal Server Error response signifies that an error, validations, or invalid data is processed within the system that prevents the process to be successful. Examples of these are such as User does not exist, wrong credentials, restrictions. If the process is successful and complete the request of the user, it will return an OK response, signifying that the request is successful.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27541062",
-		"_collection_link": "https://voipcoders.postman.co/workspace/MyTest~1552ba08-5f24-4370-90fa-c8f319639dbd/collection/27541062-a939e414-816b-4f41-b6fd-294644dfe0ee?action=share&source=collection_link&creator=27541062"
+		"_collection_link": "https://voipcoders.postman.co/workspace/1552ba08-5f24-4370-90fa-c8f319639dbd/collection/27541062-61604162-56dd-4d51-bd0d-37acbe1992b8?action=share&source=collection_link&creator=27541062"
 	},
 	"item": [
 		{
@@ -29,16 +29,7 @@
 			"item": [
 				{
 					"name": "Store",
-					"item": [
-						{
-							"name": "Get All Stores",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						}
-					],
+					"item": [],
 					"description": "When a user successfully created and logged in their account, they have the privileges to create and manage their stores, and also all stores if the user's role is either Administrator or Super Administrator, which gives all CRUD access to every store.\n\nBefore making a request, user's JWT must be inserted first in as a \"Bearer token\" to load and carry its information that can be used for validations and searches.\n\nThe following are the APIs for the Store:\n\n| API | **Method** | Description |\n| --- | --- | --- |\n| /store/allStores | GET | If **Administrator** or **Super Administrator**, return all stores created and own by all users. If only a USER, it will return a warning message saying it doesn't have an access to all stores. |\n| /store/userStores | GET | Using the user's JWT, it will search and return all the stores own by that user. |\n| /store/getStore/{storeId} | GET | By inserting a store id in replacement of {storeId}, it will return the details of that store, including the owner/user. |\n| /store/searchStore | POST | By following the criteria for searching, the user can search the store by user's details or store's details. |\n| /store/create | POST | By entering the fields provided by the form, the store will be created and it will be referenced to the user by retrieving the user id from the JWT. |\n| /store/{storeId}/update | PUT | By inserting a store id in replacement of {storeId} and by entering the fields provided by the form, it will update the details of store. If the form and the current store details has no difference, it will return an error message. |\n| /store/{storeId}/delete | DELETE | By inserting a store id in replacement of {storeId}, it will delete the store with the corresponding id owned by the user. |"
 				},
 				{
