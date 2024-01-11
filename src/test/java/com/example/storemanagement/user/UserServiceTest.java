@@ -17,6 +17,9 @@ import com.example.storemanagement.user.domain.Users;
 import com.example.storemanagement.user.dto.LoginForm;
 import com.example.storemanagement.user.dto.UserForm;
 import com.example.storemanagement.user.service.UserServiceImpl;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javax.jws.soap.SOAPBinding.Use;
 import org.junit.Before;
 import org.junit.Test;
@@ -70,7 +73,6 @@ public class UserServiceTest {
 
         loginForm = new LoginForm("test-email@gmail.com", "Pogiako123_");
     }
-
     @Test
     public void createUser_success(){
         Users user = new Users(form.getFirstName(), form.getLastName(), form.getPassword(), form.getEmail(), form.getRole());

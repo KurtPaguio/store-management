@@ -107,6 +107,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>store-management</finalName>
 	</build>
 
 </project>

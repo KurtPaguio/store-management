@@ -12,6 +12,4 @@ public interface UserService {
 
     Users createUser(UserForm form);
     ResponseEntity<AuthResponseDto> login(LoginForm form);
-    List<Users> findAllUsers();
-
 }

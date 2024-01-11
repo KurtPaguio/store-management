@@ -150,7 +150,7 @@ public class StoreServiceImpl implements StoreService{
         }
 
         String adminId = tokenGenerator.getUserFromJWT(token);
-        Users admin = userRepository.findById(adminId).orElseThrow(() -> new ValidationException("User not found with id: " + adminId));
+        Users admin = userRepository.findById(adminId).orElseThrow(() -> new NotFoundException("User not found with id: " + adminId));
 
         if(!(admin.isAdminOrSuperAdmin())){
             throw new UserRoleException("Only Administrators and Super Administrators can access this feature");

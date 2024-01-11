@@ -30,7 +30,6 @@ import com.example.storemanagement.validate.Validate;
 @Service
 public class UserServiceImpl implements UserService{
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
-
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
@@ -47,10 +46,6 @@ public class UserServiceImpl implements UserService{
         this.jwtGenerator = jwtGenerator;
     }
 
-    @Override
-    public List<Users> findAllUsers(){
-        return userRepository.findAll();
-    }
     @Override
     public Users createUser(UserForm form){
         Validate.notNull(form);

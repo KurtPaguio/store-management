@@ -30,11 +30,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getUsers")
-    public List<UserDto> getUsers(){
-        return UserDto.buildFromEntities(userService.findAllUsers());
-    }
-
     @PostMapping("/create")
     public ResponseEntity<ApiResponseDto> createUser(@RequestBody UserForm form){
         try{
