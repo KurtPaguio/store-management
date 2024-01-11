@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "a939e414-816b-4f41-b6fd-294644dfe0ee",
+		"name": "Store Management API Documentation",
+		"description": "Welcome to the **Store Management API documentation**. This guide serves as a comprehensive resource for developers for testing the Store Management APIs. This documentation will provide you with the necessary information to understand and effectively utilize our API Endpoints, what, and how to pass inputs to an endpoint.\n\n---\n\nThe Store Management API provides different APIs in interacting with the Users and Stores. Users can create and log in into the system and create their stores. They can also update or delete the stores they created. They are also restriction such as users can only see and manage their own stores. Administrator or Super Administrators have access to all features of the system such as getting all stores, managing all stores, etc. Feel free to explore the system and use the guide for instructions.\n\n## **Getting started guide**\n\nBefore making a request to an API:\n\n- Create an account first then use it to log in. After logging in, a JWT will be provided that will be used for making a certain request, mostly to validate if the feauture is not available for the user or another action is provided.\n    \n\n## Authentication\n\nThe Store Management API uses JWT that will be generated upon logging in making a request.\n\nPostman provides \"Bearer Token\" in authorization where the JWT can be inserted. It must be included for each request.\n\n### Authentication error response\n\nIf an API requires JWT and is not expired, inserted or missing key, it will return a response that the token is invalid and must be logged in to generate another token.\n\n### Internal Server Error and OK response\n\nAn Internal Server Error response signifies that an error, validations, or invalid data is processed within the system that prevents the process to be successful. Examples of these are such as User does not exist, wrong credentials, restrictions. If the process is successful and complete the request of the user, it will return an OK response, signifying that the request is successful.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27541062",
+		"_collection_link": "https://voipcoders.postman.co/workspace/MyTest~1552ba08-5f24-4370-90fa-c8f319639dbd/collection/27541062-a939e414-816b-4f41-b6fd-294644dfe0ee?action=share&source=collection_link&creator=27541062"
+	},
+	"item": [
+		{
+			"name": "Forms",
+			"item": [
+				{
+					"name": "Store Forms",
+					"item": [],
+					"description": "When making different requests, there are different forms that need to be filled up before submitting and completing the request. Here are the following forms and representation on how it will be submitted into the system:\n\n- Store Form - Used for creating, and updating a store. The following are the fields that needs to be entered:\n    \n    - name\n        - Name of the store\n        - String/Text\n    - address (String/Text)\n        - Address of the store\n        - String/Text\n    - telephoneNumber\n        - Telephone Number of the store\n        - BigInteger/Numeric\n    - emailAddress\n        - Email Address of the store\n        - String/Text\n    - type\n        - Store Type of the store: (for this store management only)\n            - DEPARTMENT_STORE\n            - SUPERMARKET\n            - CONVENIENCE_STORE\n            - WAREHOUSE\n            - BOOKSTORE\n        - String/Text\n- Search Criteria - Used for searching a store. Can be searched by user or store details. The following are the fields that needs to be entered:\n    \n    - search\n        - Detail/s of a user or owner that the user wants to search (e.g. name, email, address, etc.)\n        - String/Text\n    - type\n        - Store Type of the store\n        - String/Text\n\n**Sample way of submitting through an API Testing Tool:**\n\n- Search Form\n    - { \"name\": \"Nike\", \"address\": \"Philippines\", \"telephoneNumber\": \"870001\", \"emailAddress\": \"[nike@gmail.com](https://mailto:nike@gmail.com)\", \"type\": \"WAREHOUSE\" }\n- Search Criteria\n    - { \"search\": \"nike\", \"type\": \"WAREHOUSE\" }\n    - In type field, \"ALL\" can be used to display all stores regardless of store type."
+				},
+				{
+					"name": "User Forms",
+					"item": [],
+					"description": "Forms that will be used for Users are for login and create/register requests. This will allow their details to be inserted into the database and have access to log into the system. Here are the following forms and representation on how it will be submitted into the system:\n\n- User Form - Used to create/register account for the user. The following are the fields that needs to be entered:\n    - firstName\n        - First Name of the user\n        - String/Text\n    - lastName\n        - Last Name of the user\n        - String/Text\n    - password\n        - Password of the account\n        - String/Text\n    - email\n        - Email of the user\n        - String/Text\n    - role\n        - Role of the user: USER, ADMIN/SUPERUSER\n        - String/Text\n- Login Form - Used to log into the system. The following are the fields that needs to be entered:\n    - email\n        - Email of the user\n        - String/Text\n    - password\n        - Password of the account\n        - String/Text\n\n**Sample way of submitting through an API Testing Tool:**\n\n- User Form\n    \n    - { \"firstName\": \"John\", \"lastName\": \"Doe\", \"password\": \"JohnDoe123_\", \"email\": \"johndoe@gmail.com\", \"role\": \"USER\" }\n        \n- Login Form\n    \n    - { \"email\": \"johndoe@gmail.com\", \"password\": \"JohnDoe123_\" }"
+				}
+			],
+			"description": "Different Forms are needed for making a request to some APIs. It is used to pass the user inputs to the system then be validated before making a successful request or returning a warning message when the inputs are invalid or system error.\n\nThis section will discuss all the forms that will be used for User and Store and sample way on how it will be represented and be passed into the system."
+		},
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Store",
+					"item": [
+						{
+							"name": "Get All Stores",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					],
+					"description": "When a user successfully created and logged in their account, they have the privileges to create and manage their stores, and also all stores if the user's role is either Administrator or Super Administrator, which gives all CRUD access to every store.\n\nBefore making a request, user's JWT must be inserted first in as a \"Bearer token\" to load and carry its information that can be used for validations and searches.\n\nThe following are the APIs for the Store:\n\n| API | **Method** | Description |\n| --- | --- | --- |\n| /store/allStores | GET | If **Administrator** or **Super Administrator**, return all stores created and own by all users. If only a USER, it will return a warning message saying it doesn't have an access to all stores. |\n| /store/userStores | GET | Using the user's JWT, it will search and return all the stores own by that user. |\n| /store/getStore/{storeId} | GET | By inserting a store id in replacement of {storeId}, it will return the details of that store, including the owner/user. |\n| /store/searchStore | POST | By following the criteria for searching, the user can search the store by user's details or store's details. |\n| /store/create | POST | By entering the fields provided by the form, the store will be created and it will be referenced to the user by retrieving the user id from the JWT. |\n| /store/{storeId}/update | PUT | By inserting a store id in replacement of {storeId} and by entering the fields provided by the form, it will update the details of store. If the form and the current store details has no difference, it will return an error message. |\n| /store/{storeId}/delete | DELETE | By inserting a store id in replacement of {storeId}, it will delete the store with the corresponding id owned by the user. |"
+				},
+				{
+					"name": "Users",
+					"item": [],
+					"description": "In store management, there are two kinds of user:\n\n- USER\n    - can create, update, delete, or view their store/s\n- ADMIN / SUPERUSER\n    - has all CRUD access\n\nUsers can create and login their accounds by filling up the provided forms. The following are the APIs for the User:\n\n| API | **Method** | Description |\n| --- | --- | --- |\n| /users/create | POST | By filling up the provided fields from the form, with valid fields, the user details will be created and can now be used to log into the system. |\n| /users/login | POST | By entering the email and password, if it exists in the database, it will grant the user access and will be provided with a JWT for authorization. |"
+				}
+			],
+			"description": "Application Programming Interface (API) connects the two clients and make them communicate easier. Mostly it is used for the front-end side of the system communicate with the back-end side and vice versa to process the data that need to be returned and displayed to the client side.\n\nThis section will discuss the different APIs for the User and Store and a brief description on what it will do when making a request."
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
